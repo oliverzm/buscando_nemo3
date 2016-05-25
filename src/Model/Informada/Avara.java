@@ -5,21 +5,20 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import Model.AlgoritmoBusqueda;
-import Model.ComparadorCostos;
-import Model.ComparadorCostosA_asterisk;
+import Model.ComparadorCostosAvara;
 import Model.Nodo;
 import Model.Personaje;
 
-public class A_asterisk extends AlgoritmoBusqueda{
+public class Avara extends AlgoritmoBusqueda{
 
 	private Comparator<Nodo> comparador;
     private PriorityQueue<Nodo> cola;
     private Point[] listadoMetas;
 	
-	public A_asterisk(byte[][] matriz, byte n, int tipoHeuristica) 
+	public Avara(byte[][] matriz, byte n, int tipoHeuristica) 
 	{
 		super(matriz, n);
-		comparador = new ComparadorCostosA_asterisk();
+		comparador = new ComparadorCostosAvara();
 		cola = new PriorityQueue<Nodo>(10, comparador);	
 		listadoMetas = new Point[3];
 	}
@@ -61,7 +60,7 @@ public class A_asterisk extends AlgoritmoBusqueda{
         {
         	return;
         }
-        
+        //System.out.println(nodoActual+" - "+nodoActual.getValorHeuristica());
         if (i - 1 >= 0) 
         {
             this.crearNodo((byte) (i - 1), j, this.idsHistorialPadres, nodoActual);
@@ -103,9 +102,10 @@ public class A_asterisk extends AlgoritmoBusqueda{
         {
             Nodo nodo = new Nodo(padreId, i, j, nodoActual.getMatriz(), nodoActual.getMetasCumplidas(), nodoActual.getMetaActual());
             nodo.setFactorReduccion(nodoActual.getFactorReduccion());
-            nodo.setCostoAcumulado(nodoActual.getCostoAcumulado());
+            nodo.setCostoAcumulado(nodoActual.getCostoAcumulado());            
             nodo.setValorHeuristica(this.primeraHeuristica(i, j, listadoMetas[nodoActual.getMetasCumplidas()]));
-            nodo.setfN();
+            //System.out.println(nodoActual.getValorHeuristica()+" - "+nodoActual.getCostoAcumulado()+" - "+nodo.getMetaActual());
+            System.out.println(nodo+" - "+nodo.getValorHeuristica()+" - "+nodo.getMetasCumplidas());
             this.cola.add(nodo);
             this.nodoCreados++;
         }
@@ -122,6 +122,7 @@ public class A_asterisk extends AlgoritmoBusqueda{
     public double primeraHeuristica(int x, int y, Point coordenada)
     {
         double heuristica = Math.abs(x-coordenada.getX())+Math.abs(y-coordenada.getY());
+        //System.out.println(x+" - "+y+" - "+coordenada.getX()+" - "+coordenada.getY());
         return heuristica;
     }
 	
@@ -156,8 +157,6 @@ public class A_asterisk extends AlgoritmoBusqueda{
 		Nodo primerNodo = new Nodo(0, posX, posY, this.matriz.clone(), (byte) 0, Personaje.NEMO);
 		primerNodo.setCostoAcumulado(0);
 		primerNodo.setValorHeuristica(this.primeraHeuristica(posX, posY, listadoMetas[0]));
-		primerNodo.setfN();
-		
 		cola.add(primerNodo);
 	}
 }

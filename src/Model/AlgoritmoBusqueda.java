@@ -49,16 +49,21 @@ public class AlgoritmoBusqueda {
     	Nodo nodo = this.nodoFinal;
         int index = nodo.getPadre();
         String ruta = nodo.toString();
-        while (true) {
-        	
-        	System.out.println(nodo.getCosto()+" - "+nodo.getCostoAcumulado()+ " - "+nodo.getValorHeuristica()+" - "+nodo.getfN());
-            System.out.println("----------");
+        
+        System.out.println(nodo+" - "+nodo.getCosto()+" - "+nodo.getCostoAcumulado()+ " - "+nodo.getValorHeuristica()+" - "+nodo.getfN()+" - "+nodo.getMetasCumplidas());
+        System.out.println("----------");
+        
+        while (true) {       	
         	
             index = nodo.getPadre();
             nodo = this.historialPadres.get(index);
             //nodo.mostrarMatriz();
             
             ruta = nodo + "-->"+ruta;
+            
+            System.out.println(nodo+" - "+nodo.getCosto()+" - "+nodo.getCostoAcumulado()+ " - "+nodo.getValorHeuristica()+" - "+nodo.getfN()+" - "+nodo.getMetasCumplidas());
+            System.out.println("----------");
+            
             if(index == 0){
                 break;
             }

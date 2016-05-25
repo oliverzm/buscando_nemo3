@@ -2,6 +2,7 @@ package Main;
 
 import Model.Nodo;
 import Model.Informada.A_asterisk;
+import Model.Informada.Avara;
 import Model.NoInformada.Amplitud;
 import Model.NoInformada.CostoUniforme;
 
@@ -21,18 +22,20 @@ public class Main
     {
         //todo realizar el menú para seleccinar que tipo de algoritmo se desea ejecutar
         //todo la ruta de la matriz puede venir como args[] del main
-        lecturaArchivo("C:/Users/Usuario/Desktop/Junior/Workspace Java/buscando-nemo/src/pruebas/prueba3.txt");
+        lecturaArchivo("C:/Users/Usuario/Desktop/Junior/Workspace Java/buscando-nemo/src/pruebas/prueba1.txt");
         //mostrarMatriz();
 
         //byte matriz [][] = {{0,2,2,1,1},{ 2,3,4,2,7},{2,1,2,8,1},{1,1,3,2,1},{2,6,2,4,5}};
         //byte n = 5;
         //Amplitud amplitud = new Amplitud(matriz, n);
-        CostoUniforme costoUniforme = new CostoUniforme(matriz, n);
-        //A_asterisk a_ask = new A_asterisk(matriz, n, 1);
+        //CostoUniforme costoUniforme = new CostoUniforme(matriz, n);
+        A_asterisk a_ask = new A_asterisk(matriz, n, 1);
+        Avara avara = new Avara(matriz, n, 1);
         long tInicio = System.currentTimeMillis();
         //amplitud.run();
-        costoUniforme.run();
+        //costoUniforme.run();
         //a_ask.run();
+        avara.run();
         long tFin = System.currentTimeMillis();
         long tiempo = tFin - tInicio;
         System.out.println("Tiempo de ejecución: " + tiempo + "ms");        
